@@ -483,26 +483,30 @@ def cli():
 )
 @click.option(
     "--aws-access-key-id", type=str, help=(
-        "Specify an aws access key id (must use --aws-secret-access-key as well)"
+        "Specify an aws access key id (must also use --aws-secret-access-key)"
     )
 )
 @click.option(
     "--aws-secret-access-key", type=str, help=(
-        "Specify an aws secret access key (must use --aws-secret-access-key as well)"
+        "Specify an aws secret access key (must also use --aws-access-key-id)"
     )
 )
 @click.option(
     "--aws-session-token", type=str, help=(
-        "Optional AWS session token (must use both --aws-secret-access-key and --aws-secret-access-key as well)"
+        """Optional AWS session token
+           (must use both --aws-secret-access-key and --aws-access-key-id)"""
     )
 )
 @click.option(
     "--profile-name", type=str, help=(
-        "Specify a profile to use for Boto. See http://boto3.readthedocs.io/en/latest/guide/configuration.html for more information"
+        """Specify a profile to use for Boto.
+           See http://boto3.readthedocs.io/en/latest/guide/configuration.html
+           for more information"""
     )
 )
-def update_certificates(persistent=False, force_issue=False, profile_name=None,
-                        aws_access_key_id=None, aws_secret_access_key=None, aws_session_token=None):
+def update_certificates(persistent=False, force_issue=False,
+                        profile_name=None, aws_access_key_id=None,
+                        aws_secret_access_key=None, aws_session_token=None):
     logger = Logger()
     logger.emit("startup")
 
@@ -511,7 +515,8 @@ def update_certificates(persistent=False, force_issue=False, profile_name=None,
 
     if aws_access_key_id or aws_secret_access_key or aws_session_token:
         if aws_access_key_id is None or aws_secret_access_key is None:
-            raise ValueError("You need to provide both --aws-access-key-id and --aws-secret-access-key")
+            raise ValueError("""You need to provide both --aws-access-key-id
+                                and --aws-secret-access-key""")
 
     session = boto3.Session(profile_name=profile_name,
                             aws_access_key_id=aws_access_key_id,
