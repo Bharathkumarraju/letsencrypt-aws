@@ -81,6 +81,12 @@ useful for production environments.
 If your certificate is not expiring soon, but you need to issue a new one
 anyways, the `--force-issue` flag can be provided.
 
+If you would like to specify a profile to use (see http://boto3.readthedocs.io/en/latest/guide/configuration.html),
+provide the profile name with the `--profile-name` argument.
+
+If you would like to specify an aws keys (see http://boto3.readthedocs.io/en/latest/guide/configuration.html),
+provide them with the `--aws-access-key-id`, `--aws-secret-access-key`, and the optional `--aws-session-token` arguments.
+
 If you're into [Docker](https://www.docker.com/), there is an automatically
 built image of `letsencrypt-aws` available as
 [`alexgaynor/letsencrypt-aws`](https://hub.docker.com/r/alexgaynor/letsencrypt-aws/).
